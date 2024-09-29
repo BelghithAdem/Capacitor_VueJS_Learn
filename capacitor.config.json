@@ -1,0 +1,10 @@
+{
+  "appId": "com.example.app",
+  "appName": "app-mobile",
+  "webDir": "public",
+  "url": "loclhost",
+  "plugins": {
+  },
+  "cordova": {}
+}
+
