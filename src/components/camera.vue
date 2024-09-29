@@ -13,7 +13,7 @@
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 
 export default {
-    name: 'CameraTest', // Assurez-vous que le nom est 'LoginPage'
+  name: "CameraTest", // Assurez-vous que le nom est 'LoginPage'
 
   data() {
     return {
