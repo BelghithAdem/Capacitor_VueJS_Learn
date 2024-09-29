@@ -39,11 +39,13 @@ export default {
 </script>
 
 <style scoped>
-.take-photo {
-  text-align: center;
-  margin-top: 20px;
-}
 
+.photo {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3490dc;
+}
 .btn {
   background-color: #3490dc;
   color: white;
@@ -52,11 +54,9 @@ export default {
   border-radius: 5px;
   cursor: pointer;
 }
-
-.photo {
+.take-photo {
+  text-align: center;
   margin-top: 20px;
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #3490dc;
 }
+
 </style>
