@@ -1,29 +1,24 @@
 <template>
   <h3>Google Maps</h3>
-  <div id="map" style="height: 100vh; width: 100%;"></div>
+  <div id="map" style="height: 100vh; width: 100%"></div>
 </template>
 
 <script>
-import { Geolocation } from '@capacitor/geolocation';
-import { GoogleMap } from '@capacitor/google-maps';
+import { GoogleMap } from "@capacitor/google-maps";
+import { Geolocation } from "@capacitor/geolocation";
 
 export default {
-  name: 'LoginPage', // Assurez-vous que le nom est 'LoginPage'
-  
+  name: "LoginPage", // Assurez-vous que le nom est 'LoginPage'
+  mounted() {
+    this.loadMap();
+  },
   data() {
     return {
       photo: null, // Stocke la photo capturée
     };
   },
-  
-  mounted() {
-    this.loadMap();
-  },
 
   methods: {
-   
-
-
     async loadMap() {
       try {
         // Obtenir la position actuelle de l'utilisateur
@@ -31,11 +26,11 @@ export default {
         const { latitude, longitude } = position.coords;
 
         // Créer la carte
-        const mapElement = document.getElementById('map');
+        const mapElement = document.getElementById("map");
         const newMap = await GoogleMap.create({
-          id: 'my-cool-map', // ID de la carte
+          id: "my-cool-map", // ID de la carte
           element: mapElement, // Élément HTML où la carte sera affichée
-          apiKey: '&callback=initMap', // Ta clé API Google Maps
+          apiKey: "&callback=initMap", // Ta clé API Google Maps
           config: {
             center: {
               lat: latitude,
@@ -53,7 +48,7 @@ export default {
           },
         });
       } catch (error) {
-        console.error('Erreur lors du chargement de la carte:', error);
+        console.error("Erreur lors du chargement de la carte:", error);
       }
     },
   },
