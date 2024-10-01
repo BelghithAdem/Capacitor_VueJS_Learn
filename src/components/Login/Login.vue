@@ -4,20 +4,18 @@
 </template>
 
 <script>
-import { Geolocation } from "@capacitor/geolocation";
 import { GoogleMap } from "@capacitor/google-maps";
+import { Geolocation } from "@capacitor/geolocation";
 
 export default {
   name: "LoginPage", // Assurez-vous que le nom est 'LoginPage'
-
+  mounted() {
+    this.loadMap();
+  },
   data() {
     return {
       photo: null, // Stocke la photo capturée
     };
-  },
-
-  mounted() {
-    this.loadMap();
   },
 
   methods: {
