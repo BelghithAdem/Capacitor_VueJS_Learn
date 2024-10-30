@@ -1,37 +1,56 @@
 <template>
-  <div class="take-photo">
-    <button @click="takePhoto" class="btn">Prendre une photo</button>
-
-    <div v-if="photo">
-      <h3>Photo prise :</h3>
-      <img :src="photo" alt="Taken photo" class="photo" />
-    </div>
-  </div>
+  <h3>Google Maps</h3>
+  <div id="map" style="height: 100vh; width: 100%"></div>
 </template>
 
 <script>
-import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { Geolocation } from "@capacitor/geolocation";
+import { GoogleMap } from "@capacitor/google-maps";
 
 export default {
-    name: 'CameraTest', // Assurez-vous que le nom est 'LoginPage'
+  name: "LoginPage", // Assurez-vous que le nom est 'LoginPage'
 
   data() {
     return {
-      photo: null, // pour stocker la photo capturée
+      photo: null, // Stocke la photo capturée
     };
   },
+
+  mounted() {
+    this.loadMap();
+  },
+
   methods: {
-    async takePhoto() {
+    async loadMap() {
       try {
-        const photo = await Camera.getPhoto({
-          quality: 90,
-          allowEditing: false,
-          resultType: CameraResultType.DataUrl, // retourne la photo en Data URL
-          source: CameraSource.Camera, // utiliser la caméra
+        // Obtenir la position actuelle de l'utilisateur
+        const position = await Geolocation.getCurrentPosition();
+        const { latitude, longitude } = position.coords;
+
+        // Créer la carte
+        const mapElement = document.getElementById("map");
+        const newMap = await GoogleMap.create({
+          id: "my-cool-map", // ID de la carte
+          element: mapElement, // Élément HTML où la carte sera affichée
+          apiKey: "&callback=initMap", // Ta clé API Google Maps
+          config: {
+            center: {
+              lat: latitude,
+              lng: longitude,
+            },
+            zoom: 14,
+          },
         });
-        this.photo = photo.dataUrl; // stocker la photo en format Base64
+
+        // Ajouter un marqueur pour la position actuelle
+        await newMap.addMarker({
+          coordinate: {
+            lat: latitude,
+            lng: longitude,
+          },
+        });
       } catch (error) {
-        console.error("Erreur lors de la prise de photo :", error);
+        console.error("Erreur lors du chargement de la carte:", error);
       }
     },
   },
@@ -39,24 +58,15 @@ export default {
 </script>
 
 <style scoped>
-.take-photo {
+.photo-container {
   text-align: center;
   margin-top: 20px;
 }
-
-.btn {
-  background-color: #3490dc;
+button {
+  background-color: #42b983;
   color: white;
-  padding: 10px 20px;
+  padding: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-}
-
-.photo {
-  margin-top: 20px;
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #3490dc;
 }
 </style>
