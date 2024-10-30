@@ -9,6 +9,8 @@ import { GoogleMap } from "@capacitor/google-maps";
 
 export default {
   name: "LoginPage", // Assurez-vous que le nom est 'LoginPage'
+  name: "CameraTest", // Assurez-vous que le nom est 'LoginPage'
+
 
   data() {
     return {
@@ -60,13 +62,23 @@ export default {
 <style scoped>
 .photo-container {
   text-align: center;
+
+.photo {
   margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3490dc;
 }
-button {
-  background-color: #42b983;
+.btn {
+  background-color: #3490dc;
   color: white;
   padding: 10px;
   border: none;
   cursor: pointer;
 }
+.take-photo {
+  text-align: center;
+  margin-top: 20px;
+}
+
 </style>

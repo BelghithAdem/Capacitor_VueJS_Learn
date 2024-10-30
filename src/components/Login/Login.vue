@@ -15,6 +15,19 @@ import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 export default {
     name: 'CameraTest', // Assurez-vous que le nom est 'LoginPage'
 
+  <h3>Google Maps</h3>
+  <div id="map" style="height: 100vh; width: 100%"></div>
+</template>
+
+<script>
+import { GoogleMap } from "@capacitor/google-maps";
+import { Geolocation } from "@capacitor/geolocation";
+
+export default {
+  name: "LoginPage", // Assurez-vous que le nom est 'LoginPage'
+  mounted() {
+    this.loadMap();
+  },
   data() {
     return {
       photo: null, // pour stocker la photo capturée
@@ -28,10 +41,40 @@ export default {
           allowEditing: false,
           resultType: CameraResultType.DataUrl, // retourne la photo en Data URL
           source: CameraSource.Camera, // utiliser la caméra
+=======
+
+  methods: {
+    async loadMap() {
+      try {
+        // Obtenir la position actuelle de l'utilisateur
+        const position = await Geolocation.getCurrentPosition();
+        const { latitude, longitude } = position.coords;
+
+        // Créer la carte
+        const mapElement = document.getElementById("map");
+        const newMap = await GoogleMap.create({
+          id: "my-cool-map", // ID de la carte
+          element: mapElement, // Élément HTML où la carte sera affichée
+          apiKey: "&callback=initMap", // Ta clé API Google Maps
+          config: {
+            center: {
+              lat: latitude,
+              lng: longitude,
+            },
+            zoom: 14,
+          },
+        });
+
+        // Ajouter un marqueur pour la position actuelle
+        await newMap.addMarker({
+          coordinate: {
+            lat: latitude,
+            lng: longitude,
+          },
         });
         this.photo = photo.dataUrl; // stocker la photo en format Base64
       } catch (error) {
-        console.error("Erreur lors de la prise de photo :", error);
+        console.error("Erreur lors du chargement de la carte:", error);
       }
     },
   },
@@ -59,4 +102,5 @@ export default {
   height: auto;
   border: 2px solid #3490dc;
 }
+
 </style>
