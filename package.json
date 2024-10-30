@@ -19,7 +19,6 @@
     "@ionic/core": "^8.3.0",
     "@ionic/pwa-elements": "^3.3.0",
     "@ionic/vue": "^8.3.0",
-    "@rdlabo/capacitor-facebook-login": "^2.0.3",
     "autoprefixer": "^10.4.20",
     "core-js": "^3.8.3",
     "ionicons": "^4.5.9-1",

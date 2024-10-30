@@ -5,5 +5,8 @@ project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/
 include ':capacitor-camera'
 project(':capacitor-camera').projectDir = new File('../node_modules/@capacitor/camera/android')
 
-include ':rdlabo-capacitor-facebook-login'
-project(':rdlabo-capacitor-facebook-login').projectDir = new File('../node_modules/@rdlabo/capacitor-facebook-login/android/@rdlabo/capacitor-facebook-login')
+include ':capacitor-geolocation'
+project(':capacitor-geolocation').projectDir = new File('../node_modules/@capacitor/geolocation/android')
+
+include ':capacitor-google-maps'
+project(':capacitor-google-maps').projectDir = new File('../node_modules/@capacitor/google-maps/android')
